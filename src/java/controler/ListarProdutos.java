@@ -7,11 +7,13 @@ package controler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Catalogo;
 import model.ClassificacaoProduto;
 import model.Produto;
 import model.Usuario;
@@ -73,9 +75,34 @@ public class ListarProdutos extends HttpServlet {
                out.println("Ola, " + usua.getNome() 
                        + " (" + usua.getLogin() 
                        + "). Voce tem " + usua.getIdade() 
-                       + " anos.");
-                
-                
+                       + " anos. <br/>");
+               
+               Catalogo cat = new Catalogo();
+               cat.setLista(lista);
+               
+               
+               // listar os produtos infantis
+               for(Produto p : cat.listarProdutos(ClassificacaoProduto.INFANTIL)){
+                   out.println("produto: " + p.getNome() + "(" + p.getTipo() + ") "
+                           + "<a href=adicionarCarrinho?idprod=" + p.getId() +"> Adicionar </a>"
+                           + ""
+                           + "<br/>");
+               }
+               
+               //verificar a idade do usuario
+               if (usua.getIdade() > 18){
+               // se for maior de idade
+               //listar os produtos de adulto
+                for(Produto p : cat.listarProdutos(ClassificacaoProduto.ADULTO)){
+                    out.println("produto: " + p.getNome() + "(" + p.getTipo() + ") <br/>");
+                }
+                for(Produto p : cat.listarProdutos(ClassificacaoProduto.IDOSO)){
+                   out.println("produto: " + p.getNome() + "(" + p.getTipo() + ") <br/>");
+               }
+               
+               }
+               
+               
             }
             
             
