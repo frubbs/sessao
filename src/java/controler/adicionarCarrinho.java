@@ -6,23 +6,19 @@ package controler;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Catalogo;
-import model.ClassificacaoProduto;
-import model.Produto;
-import model.Usuario;
 
 /**
  *
  * @author Rafael.Soares
  */
-public class ListarProdutos extends HttpServlet {
+public class adicionarCarrinho extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -39,63 +35,51 @@ public class ListarProdutos extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            
+            
+            //recuperar o carrinho do usuario
+            HttpSession sessao = request.getSession(false);
+            if(sessao == null) {
+                request.getRequestDispatcher("index.html").forward(request, response);
+            }
+            
+            ArrayList<Integer> carrinho= (ArrayList<Integer>) sessao.getAttribute("carr");
+            
+            
+            int numeroAleatorio = new Random().nextInt(5);
+            
+            
+            
+            //se nao existir carrinho, criar um
+            if(carrinho == null){
+                carrinho = new ArrayList<Integer>();
+            }
+            
+             //Descobrir o id do produto
+            int id = Integer.parseInt(request.getParameter("idprod"));
+           
+            // adicionar o id no carrinho
+            carrinho.add(id);
+            
+            //armazena o carrinho atualizado na sessao
+            sessao.setAttribute("carr", carrinho);
+            
+            // exibir mensagem de sucesso
+            
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListarProdutos</title>");            
+            out.println("<title>Servlet adicionarCarrinho</title>");            
             out.println("</head>");
             out.println("<body>");
+            out.println("<h1>Produto adicionado com sucesso...</h1>");
+            out.println("<h2>Itens no carrinho:</h2>");
             
-           
-            
-            
-            
-            HttpSession session = request.getSession(false);
-            if(session == null){
-                System.out.println("nao logado");
-                request.getRequestDispatcher("index.html").forward(request, response);
-            }
-            else {
-                
-               Usuario usua = (Usuario) request.getAttribute("usu");
-               
-               out.println("Ola, " + usua.getNome() 
-                       + " (" + usua.getLogin() 
-                       + "). Voce tem " + usua.getIdade() 
-                       + " anos. <br/>");
-               
-               Catalogo cat = new Catalogo();
-               
-               
-               // listar os produtos infantis
-               for(Produto p : cat.listarProdutos(ClassificacaoProduto.INFANTIL)){
-                   out.println("produto: " + p.getNome() + "(" + p.getTipo() + ") "
-                           + "<a href=adicionarCarrinho?idprod=" + p.getId() +"> Adicionar </a>"
-                           + ""
-                           + "<br/>");
-               }
-               
-               //verificar a idade do usuario
-               if (usua.getIdade() > 18){
-               // se for maior de idade
-               //listar os produtos de adulto
-                for(Produto p : cat.listarProdutos(ClassificacaoProduto.ADULTO)){
-                    out.println("produto: " + p.getNome() + "(" + p.getTipo() + ") <br/>");
-                }
-                for(Produto p : cat.listarProdutos(ClassificacaoProduto.IDOSO)){
-                   out.println("produto: " + p.getNome() + "(" + p.getTipo() + ") <br/>");
-               }
-               
-               }
-               
-               
+            for(Integer i : carrinho){
+                out.println(i + "<br/>");
             }
             
-            
-            
-            
-            out.println("<h1>Servlet ListarProdutos at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {            

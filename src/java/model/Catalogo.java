@@ -22,9 +22,22 @@ public class Catalogo {
     
     private HashMap<Integer,Produto> lista;
      
-public Catalogo(String filename) {
+public Catalogo() {
         this.lista = new HashMap<Integer,Produto>();
-        lerDoArquivo(filename);
+        //lerDoArquivo(filename);
+        
+         //Cria produtos falsos
+            Produto p1 = new Produto(1,"Prod1",ClassificacaoProduto.ADULTO);
+            lista.put(1,p1);
+            lista.put(2,new Produto(2,"Prod2",ClassificacaoProduto.ADULTO));
+            lista.put(3,new Produto(3,"Prod3",ClassificacaoProduto.ADULTO));
+            lista.put(4,new Produto(4,"Prod4",ClassificacaoProduto.IDOSO));
+            lista.put(5,new Produto(5,"Prod5",ClassificacaoProduto.INFANTIL));
+            lista.put(6,new Produto(6,"Prod6",ClassificacaoProduto.IDOSO));
+            lista.put(7,new Produto(7,"Prod7",ClassificacaoProduto.INFANTIL));
+            lista.put(8,new Produto(8,"Prod8",ClassificacaoProduto.INFANTIL));
+            lista.put(9,new Produto(9,"Prod9",ClassificacaoProduto.ADULTO));
+            lista.put(10,new Produto(10,"Prod10",ClassificacaoProduto.IDOSO));
     }
     
     private void lerDoArquivo(String filename)
@@ -58,10 +71,7 @@ public Catalogo(String filename) {
     }
     
     
-    //somente para testes
-    public Catalogo() {
-        
-    }
+    
     
     //somente para testes
     public void setLista(HashMap<Integer,Produto> lista) {
