@@ -16,6 +16,14 @@
         <servlet-name>adicionarCarrinho</servlet-name>
         <servlet-class>controler.adicionarCarrinho</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListarCarrinho</servlet-name>
+        <servlet-class>controler.ListarCarrinho</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Logoff</servlet-name>
+        <servlet-class>controler.Logoff</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListarProdutosTest</servlet-name>
         <url-pattern>/ListarProdutosTest</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>adicionarCarrinho</servlet-name>
         <url-pattern>/adicionarCarrinho</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListarCarrinho</servlet-name>
+        <url-pattern>/ListarCarrinho</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logoff</servlet-name>
+        <url-pattern>/Logoff</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

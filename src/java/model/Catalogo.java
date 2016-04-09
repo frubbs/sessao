@@ -27,49 +27,18 @@ public Catalogo() {
         //lerDoArquivo(filename);
         
          //Cria produtos falsos
-            Produto p1 = new Produto(1,"Prod1",ClassificacaoProduto.ADULTO);
+            Produto p1 = new Produto(1,"Prod1",ClassificacaoProduto.ADULTO, 10, 5);
             lista.put(1,p1);
-            lista.put(2,new Produto(2,"Prod2",ClassificacaoProduto.ADULTO));
-            lista.put(3,new Produto(3,"Prod3",ClassificacaoProduto.ADULTO));
-            lista.put(4,new Produto(4,"Prod4",ClassificacaoProduto.IDOSO));
-            lista.put(5,new Produto(5,"Prod5",ClassificacaoProduto.INFANTIL));
-            lista.put(6,new Produto(6,"Prod6",ClassificacaoProduto.IDOSO));
-            lista.put(7,new Produto(7,"Prod7",ClassificacaoProduto.INFANTIL));
-            lista.put(8,new Produto(8,"Prod8",ClassificacaoProduto.INFANTIL));
-            lista.put(9,new Produto(9,"Prod9",ClassificacaoProduto.ADULTO));
-            lista.put(10,new Produto(10,"Prod10",ClassificacaoProduto.IDOSO));
+            lista.put(2,new Produto(2,"Prod2",ClassificacaoProduto.ADULTO, 11, 9));
+            lista.put(3,new Produto(3,"Prod3",ClassificacaoProduto.ADULTO, 30, 23));
+            lista.put(4,new Produto(4,"Prod4",ClassificacaoProduto.IDOSO, 12, 4));
+            lista.put(5,new Produto(5,"Prod5",ClassificacaoProduto.INFANTIL, 12, 4));
+            lista.put(6,new Produto(6,"Prod6",ClassificacaoProduto.IDOSO, 13, 4));
+            lista.put(7,new Produto(7,"Prod7",ClassificacaoProduto.INFANTIL, 15, 10));
+            lista.put(8,new Produto(8,"Prod8",ClassificacaoProduto.INFANTIL, 72, 9));
+            lista.put(9,new Produto(9,"Prod9",ClassificacaoProduto.ADULTO, 22, 8));
+            lista.put(10,new Produto(10,"Prod10",ClassificacaoProduto.IDOSO, 13, 4));
     }
-    
-    private void lerDoArquivo(String filename)
-    {
-        BufferedReader br = null;
-
-		try {
-
-			String sCurrentLine;
-
-			br = new BufferedReader(new FileReader(filename));
-
-                        int i = 0;
-			while ((sCurrentLine = br.readLine()) != null) {
-                            String[] s = sCurrentLine.split(";");
-                            
-                            lista.put(i, new Produto(i, s[0], ClassificacaoProduto.valueOf(s[1])));
-                            i++;
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (br != null)br.close();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
-
-    }
-    
     
     
     

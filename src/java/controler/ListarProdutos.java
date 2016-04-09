@@ -34,6 +34,10 @@ public class ListarProdutos extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -63,7 +67,8 @@ public class ListarProdutos extends HttpServlet {
                out.println("Ola, " + usua.getNome() 
                        + " (" + usua.getLogin() 
                        + "). Voce tem " + usua.getIdade() 
-                       + " anos. <br/>");
+                       + " anos. | <a href=\"ListarCarrinho\"> <small> carrinho</small></a>"
+                       + "| <a href=\"Logoff\"> <small> logoff</small></a><br/>");
                
                Catalogo cat = new Catalogo();
                

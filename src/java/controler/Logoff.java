@@ -1,33 +1,26 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controler;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Catalogo;
-import model.ClassificacaoProduto;
-import model.Produto;
 
 /**
  *
- * @author rafa
+ * @author rafael.soares
  */
-public class ListarProdutosTest extends HttpServlet {
+public class Logoff extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -37,46 +30,23 @@ public class ListarProdutosTest extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ListarProdutosTest</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ListarProdutosTest at " + request.getContextPath() + "</h1>");
+        PrintWriter out = response.getWriter();
+        try {
+
+            request.getSession().invalidate();
+            
+            request.getRequestDispatcher("index.html").forward(request, response);
             
             
-          
-            
-            Catalogo catalogo = new Catalogo();
-            
-            out.println("Todos:<br/>");
-            
-            
-            ArrayList<Produto> l = catalogo.listarProdutos();
-            for (Produto p : l) {
-                out.println("-" + p.getNome() + "(" + p.getTipo().toString() + ") <br/>");
-            }
-            out.println("--<br/>");
-            for(ClassificacaoProduto c : ClassificacaoProduto.values()){
-                out.println(c.toString() + "<br/>");
-                for (Produto produto : catalogo.listarProdutos(c)) {
-                    out.println("-" + produto.getNome() + "(" + produto.getTipo().toString() + ") <br/>");
-                }
-                out.println("--<br/>");
-            }
-            
-            
-            out.println("</body>");
-            out.println("</html>");
+        } finally {            
+            out.close();
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP
+     * <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -90,7 +60,8 @@ public class ListarProdutosTest extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP
+     * <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -112,5 +83,4 @@ public class ListarProdutosTest extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
